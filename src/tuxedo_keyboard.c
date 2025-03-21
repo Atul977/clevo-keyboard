@@ -271,6 +271,7 @@ static const struct x86_cpu_id skip_tuxedo_dmi_string_check_match[] __initconst 
 };
 #else
 static const struct x86_cpu_id skip_tuxedo_dmi_string_check_match[] __initconst = {
+#define INTEL_FAM5_QUARK_X1000 0x0 
 	X86_MATCH_VFM(INTEL_CORE_YONAH, NULL),
 	X86_MATCH_VFM(INTEL_CORE2_MEROM, NULL),
 	X86_MATCH_VFM(INTEL_CORE2_MEROM_L, NULL),
@@ -369,17 +370,17 @@ static const struct x86_cpu_id force_tuxedo_dmi_string_check_match[] __initconst
 static const struct dmi_system_id tuxedo_dmi_string_match[] __initconst = {
 	{
 		.matches = {
-			DMI_MATCH(DMI_SYS_VENDOR, "Notebook"),
+			DMI_MATCH(DMI_SYS_VENDOR, ""),
 		},
 	},
 	{
 		.matches = {
-			DMI_MATCH(DMI_BOARD_VENDOR, "Notebook"),
+			DMI_MATCH(DMI_BOARD_VENDOR, ""),
 		},
 	},
 	{
 		.matches = {
-			DMI_MATCH(DMI_CHASSIS_VENDOR, "No Enclosure"),
+			DMI_MATCH(DMI_CHASSIS_VENDOR, ""),
 		},
 	},
 	{ }

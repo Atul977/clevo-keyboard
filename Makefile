@@ -16,11 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this software.  If not, see <https://www.gnu.org/licenses/>.
 #
-obj-m :=	./src/tuxedo_keyboard.o \
-		./src/clevo_wmi.o \
-		./src/clevo_acpi.o \
-		./src/tuxedo_io/tuxedo_io.o \
-		./src/uniwill_wmi.o
+obj-m :=	src/tuxedo_keyboard.o \
+		src/clevo_wmi.o \
+		src/clevo_acpi.o \
+		src/tuxedo_io/tuxedo_io.o \
+		src/uniwill_wmi.o
 
 PWD := $(shell pwd)
 KDIR := /lib/modules/$(shell uname -r)/build
@@ -40,11 +40,13 @@ MODULE_NAME := $(shell sed -n 's/^PACKAGE_NAME=\([^\n]*\)/\1/p' dkms.conf 2>&1 /
 
 dkmsinstall:
 	cp -R . /usr/src/$(MODULE_NAME)-$(VER)
-	dkms install -m $(MODULE_NAME) -v $(VER)
+	sudo dkms add -m $(MODULE_NAME) -v $(VER)
+	sudo dkms build -m $(MODULE_NAME) -v $(VER)
+	sudo dkms install -m $(MODULE_NAME) -v $(VER)
 
 dkmsremove:
-	dkms remove -m $(MODULE_NAME) -v $(VER) --all
-	rm -rf /usr/src/$(MODULE_NAME)-$(VER)
+	sudo dkms remove -m $(MODULE_NAME) -v $(VER) --all
+	sudo rm -rf /usr/src/$(MODULE_NAME)-$(VER)
 
 # --------------
 # Packaging only
